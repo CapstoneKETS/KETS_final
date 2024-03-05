@@ -1,11 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>details</title>
-    <h2>hello!</h2>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>sportsKeyword</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <style>
+        @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+        }
+        @font-face {
+        font-family: 'Cafe24Moyamoya-Face-v1.0';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/Cafe24Moyamoya-Face-v1.0.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        }
+        header {
+            height: 15%;
+            margin-top: 30px;
+            width: 97%;
+            text-align: right;
+            font-family: 'Pretendard-Regular';
+            font-size: 110%;
+        }
+        .title{
+            font-family: 'Cafe24Moyamoya-Face-v1.0';
+            font-size: 30px;
+            width: 90%;
+        }
+        .titleToday{
+            color: white;
+            -webkit-text-stroke: 1.5px #2968E0;
+            /* text-shadow: -2px 0px #2968E0, 0px 2px #2968E0, 2px 0px #2968E0, 0px -2px #2968E0; */
+        }
+        .titleKeyword{
+            color: #2968E0;
+        }
+        .login {
+            background-color: #2968E0;
+            font-family: 'Pretendard-slim';
+            text-align: right;
+        }
+        .newsSection{
+            float: left;
+            width: 75%;
+            height: 100%;
+        }
+        .blue-border {
+            width: 98%;
+            height: 100%;
+            box-shadow: 0 0 0 2.5px #2968E0 inset;
+            border-color: #2968E0;
+            color: #2968E0;
+        }
+        .skblue-bg {
+            background-color: #C7DAFF;
+            color: #2968E0;
+        }
+        .news {
+            text-align: left;
+        }
+        .newspaper{
+            padding-top: -15px;
+        }
+        .newsTitle{
+            font-size: 15px;
+        }
+        .newscontent{
+            height: 250px;
+            color: black;
+        }
+        .newsTimeReporter{
+            font-size: 9px;
+            color: rgb(156, 156, 156);
+        }
+        article{
+            float: left;
+            width: 25%;
+            height: 100%;
+        }
+        .remainNews {
+            text-align: left;
+            height: 24.5%;
+        }
+        .headline {
+            color: black;
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="loginBtd">
+            <span class="login badge rounded-pill">login</span>
+        </div>
+    </header>
 
+    <section class="title ms-5">
+        <div class="title d-flex justify-content-left">
+            <span class="titleToday">TODAY&nbsp;</span>
+            <span class="titleKeyword">KEYWORD</span>
+        </div>
+    </section>
+
+    <section class="mt-5 position-absolute top-50 start-50 translate-middle" style="width: 90%; height: 70%; text-align: center;">
+        <section class="newsSection">
+            <div class="news blue-border badge rounded-4">
+                <div>
+                    <div class="newspaper pt-2 pb-3">신문사</div>
+                    <div class="newsTitle text-wrap mb-2">토트넘 떠난 케인, 또 기록 작성...이번에는 '득점 전설' 게르트 뮐러 넘었다</div>
+                    <div class="newsTimeReporter mb-2">
+                        <div>2023-11-25</div>
+                        <div>홍길동 기자</div>
+                    </div>
+                    <div class="newscontent text-wrap">요약문</div>
+                </div>
+            </div>
+        </section>
+
+        <article class="remainNewslist">
+            <div class="remainNews skblue-bg badge rounded-4 mb-1">
+                <div class="newspaper pt-2 pb-1">신문사</div>
+                <div class="headline text-wrap">“오타니 텍사스행, 야마모토 양키스행” 다저스 놀라 자빠질 소리…7억달러+α ‘넣어둬, 넣어둬’</div>
+            </div>
+            <div class="remainNews skblue-bg badge rounded-4 mb-1">
+                <div class="newspaper pt-2 pb-1">신문사</div>
+                <div class="headline text-wrap">“오타니 텍사스행, 야마모토 양키스행” 다저스 놀라 자빠질 소리…7억달러+α ‘넣어둬, 넣어둬’</div>
+            </div>
+            <div class="remainNews skblue-bg badge rounded-4 mb-1">
+                <div class="newspaper pt-2 pb-1">신문사</div>
+                <div class="headline text-wrap">“오타니 텍사스행, 야마모토 양키스행” 다저스 놀라 자빠질 소리…7억달러+α ‘넣어둬, 넣어둬’</div>
+            </div>
+            <div class="remainNews skblue-bg badge rounded-4">
+                <div class="newspaper pt-2 pb-1">신문사</div>
+                <div class="headline text-wrap">“오타니 텍사스행, 야마모토 양키스행” 다저스 놀라 자빠질 소리…7억달러+α ‘넣어둬, 넣어둬’</div>
+            </div>
+        </article>
+    </section>
 </body>
-</html>
