@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "details",
     "newslist",
-    "mainpage"
+    "mainpage",
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = "mysite.urls"
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 TEMPLATES = [
     {
@@ -125,6 +124,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
