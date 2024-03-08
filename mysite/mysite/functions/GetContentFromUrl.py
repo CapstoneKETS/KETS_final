@@ -12,9 +12,9 @@ import bs4
 from time import *
 import json
 import schedule
-from Keyword import *
-from Preprocessing import *
-from mysite.mysite.mainpage.models import *
+from functions.Keyword import *
+from functions.Preprocessing import *
+from mainpage.models import *
 
 def dateForm(x):
     if (x > 0) & (x < 10):
@@ -133,8 +133,6 @@ def getNewsdatasForKwhistory():
     news_list = getNewslist(time())
     news_datas = getNewsdatas(news_list)
     articles = []
-    keyword = []
-    kw_model = modelLoad(model_type)
     for data in news_datas:
         articles.append(data['article'])
 
@@ -153,7 +151,7 @@ def insertKwhistory():
             t.save()
     print(kws)
 
-def deleteKwhistory():
+def deleteKwhistory(): # 24시간이 지난 키워드 삭제
     histories = kwHistory.objects.all().order_by('datetime')
     for history in histories:
         if history.datetime <= 23:
@@ -164,6 +162,7 @@ def deleteKwhistory():
 def updateKwhistory():
     deleteKwhistory()
     insertKwhistory()
+
 def updateKwrank():     # kwhistory -> kwrank
     kwRank.objects.all().delete()
     histories = kwHistory.objects.all()
@@ -196,20 +195,21 @@ def showMeKwtable():
     for r in kr:
         print(r.keyword, r.rank)
 
-if __name__ == '__main__':
-    # schedule.every().hour.at(":01").do(updateKwtables)
-    updateKwtables()
-
-    '''while True:
-        schedule.run_pending()
-        print(gmtime(time()+32400))
-        sleep(60)'''
-
+def dropKwtables():
     kh = kwHistory.objects.all()
     for h in kh:
         h.delete()
     kr = kwRank.objects.all()
     for r in kr:
         r.delete()
+
+if __name__ == '__main__':
+    schedule.every().hour.at(":01").do(updateKwtables)
+    # updateKwtables()
+
+    while True:
+        schedule.run_pending()
+        print(gmtime(time()+32400))
+        sleep(60)
 
     print(kwHistory.objects.all(), kwRank.objects.all(), "remain.")
