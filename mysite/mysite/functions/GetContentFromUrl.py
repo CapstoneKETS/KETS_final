@@ -14,12 +14,13 @@ import json
 import schedule
 from functions.Keyword import *
 from functions.Preprocessing import *
+from functions.SummarizeIn3Sentences import *
 from mainpage.models import *
 
 def dateForm(x):
     if (x > 0) & (x < 10):
         return '0' + str(x)
-    elif x > 10:
+    else:
         return str(x)
 
 def getSoup(url): # soup 객체를 가져옴
@@ -55,16 +56,7 @@ def getNewsdatas(metadatas):
     news_in_hour = []
     for metadata in metadatas:
         news_URL = 'https://sports.news.naver.com/news?oid=' + metadata['oid'] + '&aid=' + metadata['aid']
-        soup = getSoup(news_URL)
-        article = soup.find('div', attrs={"id": "newsEndContents"})
-        for child in article.children:
-            if isinstance(child, bs4.element.Tag):
-                child.decompose()
-        title = soup.select_one('.title').get_text()
-        temp_dict = dict()
-        temp_dict['title'] = title
-        temp_dict['article'] = article.get_text()
-        news_in_hour.append(temp_dict)
+        news_in_hour.append(getNewsdata(news_URL))
     return news_in_hour
 
 def getNewsdata(url): # 뉴스 본문 페이지에서 데이터들을 가져오는 함수
@@ -76,6 +68,9 @@ def getNewsdata(url): # 뉴스 본문 페이지에서 데이터들을 가져오�
     datetime = soup.select_one('#content > div > div.content > div > div.news_headline > div > span:nth-child(1)').get_text()
     datetime = getDatetimeFromNews(datetime)
     article = soup.find('div', attrs={"id": "newsEndContents"})
+    for child in article.children:
+        if isinstance(child, bs4.element.Tag):
+            child.decompose()
     article = deleteChild(article).get_text()
     newsdata = {}
     newsdata['title'] = title
@@ -83,6 +78,7 @@ def getNewsdata(url): # 뉴스 본문 페이지에서 데이터들을 가져오�
     newsdata['company'] = company
     newsdata['datetime'] = datetime
     newsdata['article'] = article
+    newsdata['url'] = url
     return newsdata
     
 def getDatetimeFromNews(datetime):
@@ -129,18 +125,28 @@ def readJson(now, bef): # json 형식의 파일을 한 시간 단위로 긁어�
         page += 1
     return metadatas
 
-def getNewsdatasForKwhistory():
+def insertNewsdata(data):
+    t = newsData(title = data['title'],
+                 reporter = data['reporter'],
+                 company = data['company'],
+                 datetime = data['datetime'],
+                 summary = getSummary(data['article']),
+                 url = data['url'])
+    t.save()
+
+def getKeywordsForKwhistory():
     news_list = getNewslist(time())
     news_datas = getNewsdatas(news_list)
     articles = []
     for data in news_datas:
+        insertNewsdata(data)
         articles.append(data['article'])
 
     keyword = getKwFromArticles(articles)
     return keyword
 
 def insertKwhistory():
-    kws = getNewsdatasForKwhistory()
+    kws = getKeywordsForKwhistory()
     for kw in kws:
         t = kwHistory.objects.filter(keyword=kw[0], datetime=0)
         if len(t):
@@ -184,16 +190,19 @@ def weightedrank(datetime):
 def updateKwtables():
     updateKwhistory()
     updateKwrank()
-    showMeKwtable()
+    showMeTables()
 
-def showMeKwtable():
+def showMeTables():
     kh = kwHistory.objects.all().order_by('-rank')
     kr = kwRank.objects.all().order_by('-rank')
-    print(kh, kr)
+    nd = newsData.objects.all()
+    print(kh, kr, nd)
     for h in kh:
         print(h.keyword, h.datetime, h.rank)
     for r in kr:
         print(r.keyword, r.rank)
+    for d in nd:
+        print(d.title, d.reporter, d.company, d.summary)
 
 def dropKwtables():
     kh = kwHistory.objects.all()

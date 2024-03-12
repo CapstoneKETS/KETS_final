@@ -48,11 +48,15 @@ def quotation_preprocess(sen): # 인용절 속 종결 기호를 마킹
     
     return ''.join(alphabet_list)
 
-def quotation_postprocess(sen): # 마킹한 종결 기호를 원래대로
-    sen = sen.replace("<spot>", '.')
-    sen = sen.replace("<exclamation>", '!')
-    sen = sen.replace("<question>", '?')
-    sen = sen.replace("<semicolon>", ';')
-    sen = sen.replace("<backslash>", '\\')
+def quotation_postprocess(text): # 마킹한 종결 기호를 원래대로
+    for i in range(len(text)):
+        text[i] = text[i].replace("<spot>", '.')
+        text[i] = text[i].replace("<exclamation>", '!')
+        text[i] = text[i].replace("<question>", '?')
+        text[i] = text[i].replace("<semicolon>", ';')
+        text[i] = text[i].replace("<backslash>", '\\')
 
-    return sen
+    return text
+
+def textPreprocessing(text):
+    text = quotation_preprocess(text)
