@@ -14,9 +14,9 @@ from transformers import BertModel
 from mainpage.models import kwHistory
 
 # 참조 : https://bab2min.tistory.com/544, 한국어 불용어 사전 100
-stop_words = ['지난해', '올해', '시즌', '향후', '한국', 'kbo', '야구']
+stop_words = ['지난해', '올해', '시즌', '향후', '한국', 'kbo', '야구','게티이미지코리아']
 
-url = "https://t1.daumcdn.net/cfile/tistory/241D6F475873C2B101"
+# url = "https://t1.daumcdn.net/cfile/tistory/241D6F475873C2B101"
 model_type = 'skt/kobert-base-v1'
 
 def get_soup(url): # soup 객체를 가져옴
@@ -32,7 +32,7 @@ def modelLoad(model_type):
     return kw_model
 
 def keywordExtract(keyBERT_model, text):
-       keywords = keyBERT_model.extract_keywords(text, keyphrase_ngram_range=(1, 1), stop_words=stop_words, top_n=5)
+       keywords = keyBERT_model.extract_keywords(text, keyphrase_ngram_range=(1, 1), stop_words=stop_words, top_n=5, use_mmr=True)
        return keywords 
 
 def textPreprocessing(text):

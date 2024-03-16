@@ -82,7 +82,7 @@ def summarize_text(content):
 
     R = R.sum(axis=1)
 
-    indexs = R.argsort()[-5:] # 랭크값 상위 세 문장의 인덱스를 가져옴
+    indexs = R.argsort()[-3:] # 랭크값 상위 세 문장의 인덱스를 가져옴
 
     summary = []
 
