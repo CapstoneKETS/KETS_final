@@ -8,7 +8,6 @@ import numpy as np
 from sklearn.preprocessing import normalize
 from _datetime import datetime
 import bs4
-# from konlpy.tag import *
 
 kiwi = Kiwi(model_type='knlm')
 kiwi.add_user_word('발락', 'NNP', 0)
