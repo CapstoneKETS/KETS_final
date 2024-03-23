@@ -1,13 +1,5 @@
-import json
-import bs4.element
 import requests
 from bs4 import BeautifulSoup as bs
-import re
-import pandas as pd
-import math
-import numpy as np
-from sklearn.preprocessing import normalize
-from _datetime import datetime
 from keybert import KeyBERT
 from kiwipiepy import Kiwi
 from transformers import BertModel
@@ -48,11 +40,10 @@ def textPreprocessing(text):
 def getKwFromArticles(text):
     kw_model = modelLoad(model_type)
     keywords = []
-    for i in range(len(text)):
-        keyword = keywordExtract(kw_model, textPreprocessing(text[i]))
-        for kw in keyword:
-            if kw[1] > 0.5:
-                keywords.append(kw)
+    keyword = keywordExtract(kw_model, textPreprocessing(text))
+    for kw in keyword:
+        if kw[1] > 0.5:
+            keywords.append(kw)
     return keywords
 
 '''if __name__ == '__main__':

@@ -18,3 +18,4 @@ class newsData(models.Model):
     datetime = models.CharField(max_length=10)
     summary = models.TextField(default=' ')
     url = models.URLField(null=True)
+    keywords = models.CharField(max_length=100, null=True)
