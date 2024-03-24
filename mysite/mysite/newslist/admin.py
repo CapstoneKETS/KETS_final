@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import NewsListData
+from .models import newsList
 
-admin.site.register(NewsListData)
+admin.site.register(newsList)
 # Register your models here.
