@@ -90,17 +90,18 @@
     </section>
     <section class="newlist mt-5">
 
-        {% for i in newslist %}
+        {% for i in newslist_content %}
             <div class="news blue-border badge rounded-4">
-                <div class="newspaper pt-2">{{ i.newspaper }}</div>
+                <div class="newspaper pt-2">{{ i.newslistData.company }}</div>
                 <hr>
-                <div class="newscontent text-wrap">{{ i.newstitle }}</div>
+                <div class="newscontent text-wrap">{{ i.newslistData.title }}</div>
                 <div class="newsTimeReporter">
-                    <div>{{ i.newsdate }}</div>
-                    <div>{{ i.reporter }}</div>
+                    <div>{{ i.newslistData.datetime }}</div>
+                    <div>{{ i.newslistData.reporter }}</div>
                 </div>
             </div>
         {% endfor %}
+
 
     </section>
 </body>

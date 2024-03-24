@@ -1,16 +1,22 @@
 from django.shortcuts import render
-
-# from .models import kwRank
+import random
+from .models import kwRank
 
 def index(request):
-    # queryset = kwRank.objects.order_by('-rank')[:16]
-    #
-    # keyword_list = [obj.keyword for obj in queryset]
-    #
-    # context = {
-    #     'keyword_list': keyword_list,
-    # }
+    # context = dict()
 
-    return render(request, 'mainpage/index.html')
+    # for i in range(1, 16):
+    #     context[i] = keyword
+    #
+    # print(context)
+    keyword_queryset = kwRank.objects.order_by('-rank')[:15]
+    keyword_list = list(keyword_queryset)
+    keyword_dict = {}
+    # for i in keyword_list:
 
-# Create your views here.
+    # random.shuffle(keyword_list)
+
+    context = {
+        'keyword_list': keyword_list,
+    }
+    return render(request, 'mainpage/index.html', context)

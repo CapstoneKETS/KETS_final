@@ -4,26 +4,18 @@ from .models import newsList
 
 def index(request):
 
-    # newslist = NewsListData.objects.order_by('id')[:5]
-    # newspaper = []
-    # newstitle = []
-    # newsdate = []
-    # reporter = []
-    # newslink = []
-    # for news in newslist:
-        # newspaper.append(news.newspaper)
-        #newstitle.append(news.title)
-        # newsdate.append(news.newsdate)
-        # reporter.append(news.reporter)
-        # newslink.append(news.link)
-    # context = {
-        # 'newspaper': newspaper,
-        #'newstitle': newstitle,
-        # 'newsdate': newsdate,
-        # 'reporter': reporter,
-        #'newslink': newslink,
-    # }
-    return render(request, 'newslist/index.html')
-
-
-# Create your views here.
+    newslist_data = NewsListData.objects.all()[:5]
+    newslist_content = []
+    for data in newslist_data:
+        if data.newslistData:  # newslistData가 None이 아닌 경우에만 추가
+            newslist_content.append({
+                'title': data.newslistData.title,
+                'company': data.newslistData.company,
+                'reporter': data.newslistData.reporter,
+                'datetime': data.newslistData.datetime
+            })
+    print(newslist_content)
+    content = {
+        'newslist_content': newslist_content
+    }
+    return render(request, 'newslist/index.html', content)

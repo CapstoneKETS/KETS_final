@@ -96,61 +96,69 @@
         <div class="mt-3 mb-3">
             <div class="keyword">
                 <div>
-                    <a href="">
-                        <span class="blue-bg badge rounded-pill">애버턴 팬 항의</span>
-                    </a>
-                    <a href="">
-                        <span class="blue-border badge rounded-pill">바르셀로나 가비 부상</span>
-                    </a>
-                    <a href="">
-                        <span class="skblue-bg badge rounded-pill">손흥민 해트트릭</span>
-                    </a>
-                    <a href="">
-                        <span class="blue-bg badge rounded-pill">황의찬 아스날</span>
-                    </a>
+                    {% for i in keyword_list %}
+                            <a href="">
+                                <span class="blue-bg badge rounded-pill">{{i.keyword}}</span>
+                            </a>
+                    {% endfor%}
                 </div>
-                <div>
-                    <a href="">
-                        <span class="blue-bg badge rounded-pill">황의찬 아스날</span>
-                    </a>
-                    <a href="">
-                        <span class="skblue-bg badge rounded-pill">홀란 부상</span>
-                    </a>
-                    <a href="">
-                        <span class="blue-border badge rounded-pill">바르셀로나 가비 부상</span>
-                    </a>
-                    <a href="">
-                        <span class="blue-bg badge rounded-pill">정상빈</span>
-                    </a>
-                </div>
-                <div>
-                    <a href="">
-                        <span class="blue-border badge rounded-pill">바르셀로나 가비 부상</span>
-                    </a>
-                    <a href="">
-                        <span class="blue-bg badge rounded-pill">황의찬 아스날</span>
-                    </a>
-                    <a href="">
-                        <span class="skblue-bg badge rounded-pill">홀란 부상</span>
-                    </a>
-                    <a href="">
-                        <span class="skblue-bg badge rounded-pill">홀란 부상</span>
-                    </a>
-                </div>
-                <div>
-                    <a href="">
-                        <span class="blue-bg badge rounded-pill">황의찬 아스날</span>
-                    </a>
-                    <a href="">
-                        <span class="skblue-bg badge rounded-pill">홀란 부상</span>
-                    </a>
-                    <a href="">
-                        <span class="blue-border badge rounded-pill">바르셀로나 가비 부상</span>
-                    </a>
-                    <a href="">
-                        <span class="blue-bg badge rounded-pill">정상빈</span>
-                    </a>
-                </div>
+
+<!--                <div>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-bg badge rounded-pill">{{i.keyword}}</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-border badge rounded-pill">{{i.keyword}}</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="skblue-bg badge rounded-pill">{{i.keyword}}</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-bg badge rounded-pill">{{i.keyword}}</span>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-bg badge rounded-pill">황의찬 아스날</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="skblue-bg badge rounded-pill">홀란 부상</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-border badge rounded-pill">바르셀로나 가비 부상</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-bg badge rounded-pill">정상빈</span>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-border badge rounded-pill">바르셀로나 가비 부상</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-bg badge rounded-pill">황의찬 아스날</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="skblue-bg badge rounded-pill">홀란 부상</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="skblue-bg badge rounded-pill">홀란 부상</span>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-bg badge rounded-pill">황의찬 아스날</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="skblue-bg badge rounded-pill">홀란 부상</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-border badge rounded-pill">바르셀로나 가비 부상</span>-->
+<!--                    </a>-->
+<!--                    <a href="">-->
+<!--                        <span class="blue-bg badge rounded-pill">정상빈</span>-->
+<!--                    </a>-->
+<!--                </div>-->
             </div>
         </div>
 
