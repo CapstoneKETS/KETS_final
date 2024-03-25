@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import requests
-from .models import newsList
+from .models import NewsListData
 
 def index(request):
 
