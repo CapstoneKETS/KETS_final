@@ -91,15 +91,17 @@
     <section class="newlist mt-5">
 
         {% for i in newslist_content %}
-            <div class="news blue-border badge rounded-4">
-                <div class="newspaper pt-2">{{ i.newslistData.company }}</div>
-                <hr>
-                <div class="newscontent text-wrap">{{ i.newslistData.title }}</div>
-                <div class="newsTimeReporter">
-                    <div>{{ i.newslistData.datetime }}</div>
-                    <div>{{ i.newslistData.reporter }}</div>
+            <a href="{% url 'mainpage:details' keyword i.id %}">
+                <div class="news blue-border badge rounded-4">
+                    <div class="newspaper pt-2">{{ i.company }}</div>
+                    <hr>
+                    <div class="newscontent text-wrap">{{ i.title }}</div>
+                    <div class="newsTimeReporter">
+                        <div>{{ i.datetime }}</div>
+                        <div>{{ i.reporter }}</div>
+                    </div>
                 </div>
-            </div>
+            </a>
         {% endfor %}
 
 
