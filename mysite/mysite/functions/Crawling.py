@@ -5,6 +5,7 @@ import re
 from time import *
 import json
 
+
 def dateForm(x):
     if (x > 0) & (x < 10):
         return '0' + str(x)
@@ -17,6 +18,20 @@ def getSoup(url):  # soup 객체를 가져옴
         return bs(res.text, 'html.parser')
     else:
         print(f"Super big fail! with {res.status_code}")
+
+
+def getJson(url):
+    # URL에 GET 요청을 보내고 응답을 받음
+    response = requests.get(url)
+
+    # 요청이 성공했을 때
+    if response.status_code == 200:
+        # JSON 형식의 데이터를 파이썬 데이터로 로드하여 반환
+        return response.json()
+    else:
+        print('Failed to retrieve data. Status code:', response.status_code)
+        return None
+
 
 def getNewslist(t):  # 한 시간 동안(X시 대)의 뉴스 목록 가져오기 ex) 4시 48분일 경우 3:00~3:59의 기사를 가져옴
     time_now = gmtime(t + 28800)  # 현재 시간보다 한 시간 전 GMT + 8
@@ -92,8 +107,7 @@ def readJson(now, bef):  # json 형식의 파일을 한 시간 단위로 긁어�
         dup = 0
         news_list_URL = 'https://sports.news.naver.com/wfootball/news/list?isphoto=N&date=' + dateForm(now[0]) \
                         + dateForm(now[1]) + dateForm(now[2]) + '&page=' + str(page)
-        soup = str(getSoup(news_list_URL))
-        news_metadata = json.loads(soup)
+        news_metadata = getJson(news_list_URL)
         for metadata in news_metadata['list']:  # 뉴스 메타데이터 한 건 당
             for i in metadatas:
                 if (i[0] == metadata['oid']) & (i[1] == metadata['aid']):  # 메타데이터 중복 시
