@@ -18,7 +18,7 @@ def insertNewsdata(data):
                  reporter = data['reporter'],
                  company = data['company'],
                  datetime = data['datetime'],
-                 summary = summary,
+                 summary = '<split>'.join(summary),
                  url = data['url'],
                  keywords = keywords)
     t.save()

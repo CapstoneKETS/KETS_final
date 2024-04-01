@@ -18,8 +18,6 @@ def getSoup(url):  # soup 객체를 가져옴
         return bs(res.text, 'html.parser')
     else:
         print(f"Super big fail! with {res.status_code}")
-
-
 def getJson(url):
     # URL에 GET 요청을 보내고 응답을 받음
     response = requests.get(url)
@@ -31,7 +29,6 @@ def getJson(url):
     else:
         print('Failed to retrieve data. Status code:', response.status_code)
         return None
-
 
 def getNewslist(t):  # 한 시간 동안(X시 대)의 뉴스 목록 가져오기 ex) 4시 48분일 경우 3:00~3:59의 기사를 가져옴
     time_now = gmtime(t + 28800)  # 현재 시간보다 한 시간 전 GMT + 8

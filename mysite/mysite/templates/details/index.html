@@ -114,13 +114,17 @@
         <section class="newsSection">
             <div class="news blue-border badge rounded-4">
                 <div>
-                    <div class="newspaper pt-2 pb-3">신문사</div>
-                    <div class="newsTitle text-wrap mb-2">토트넘 떠난 케인, 또 기록 작성...이번에는 '득점 전설' 게르트 뮐러 넘었다</div>
+                    <div class="newspaper pt-2 pb-3">{{ news_data.company }}</div>
+                    <div class="newsTitle text-wrap mb-2">{{ news_data.title }}</div>
                     <div class="newsTimeReporter mb-2">
-                        <div>2023-11-25</div>
-                        <div>홍길동 기자</div>
+                        <div>{{ news_data.datetime }}</div>
+                        <div>{{ news_data.reporter }}</div>
                     </div>
-                    <div class="newscontent text-wrap">요약문</div>
+                    <div class="newscontent text-wrap">
+                        {% for t in news_data.summary %}
+                            <p>{{ t }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </section>
