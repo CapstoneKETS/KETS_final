@@ -40,7 +40,9 @@ def rankIdf(kw_list):
                 tf[kw[0]] = [kw[1], 1]
     print(tf)
     for i in tf:
-        tf[i] = tf[i][0] * math.log(n / (1 + tf[i][1]))
+        idf = math.log(n / (1 + tf[i][1]))
+        tf[i] = tf[i][0] * idf if idf > 0 else tf[i][0] * 0.5
+    print(tf)
     return tf
 
 def insertKwhistory(kw_list):
@@ -73,7 +75,13 @@ def updateKwhistory(kw_list):
     insertKwhistory(kw_list)
 
 def updateKwrank():     # kwhistory -> kwrank
-    kwRank.objects.all().delete()
+    keywords = kwRank.objects.all().order_by('datetime')
+    for keyword in keywords:
+        if keyword.datetime > 23:
+            keyword.delete()
+        else:
+            keyword.datetime += 1
+            keyword.save()
     histories = kwHistory.objects.all()
     rank = dict()
 
@@ -84,7 +92,7 @@ def updateKwrank():     # kwhistory -> kwrank
 
     keywords = list(rank)
     for keyword in keywords:
-        t = kwRank(keyword=keyword, rank=rank[keyword])
+        t = kwRank(keyword=keyword, rank=rank[keyword], datetime=0)
         t.save()
 
 def weightedRank(datetime):
@@ -107,6 +115,12 @@ def showMeTables():
         print(r.keyword, r.rank)
     for d in nd:
         print(d.title, d.reporter, d.company, d.summary)
+
+def showMeKwRank():
+    kr = kwRank.objects.all().order_by('-rank')
+    print(kr)
+    for r in kr:
+        print(r.keyword, r.rank)
 
 def dropKwtables():
     kh = kwHistory.objects.all()
