@@ -9,6 +9,7 @@ class kwHistory(models.Model):
 
 class kwRank(models.Model):
     keyword = models.CharField(max_length=10)
+    datetime = models.IntegerField()
     rank = models.FloatField()
 
 class newsData(models.Model):

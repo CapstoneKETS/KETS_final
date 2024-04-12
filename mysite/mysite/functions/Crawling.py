@@ -58,6 +58,7 @@ def getNewsdata(metadatas):
 
 def getNewsdatum(url):  # 뉴스 본문 페이지에서 데이터들을 가져오는 함수
     soup = getSoup(url)
+    print(url)
     title = soup.find('title').get_text()
     reporter = soup.select_one(
         '#newsEndContents > div.reporter_area div.reporter_profile > div > div.profile_info > a > div.name').get_text()
