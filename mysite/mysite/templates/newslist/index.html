@@ -73,6 +73,9 @@
             font-size: 9px;
             color: rgb(156, 156, 156);
         }
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -83,10 +86,12 @@
     </header>
 
     <section class="title ms-5">
-        <div class="title d-flex justify-content-left">
-            <span class="titleToday">TODAY&nbsp;</span>
-            <span class="titleKeyword">KEYWORD</span>
-        </div>
+        <a href="{% url 'mainpage:index' %}">
+            <div class="title d-flex justify-content-left">
+                <span class="titleToday">TODAY&nbsp;</span>
+                <span class="titleKeyword">KEYWORD</span>
+            </div>
+        </a>
     </section>
     <section class="newlist mt-5">
 

@@ -80,10 +80,12 @@
     </header>
 
     <section class="title">
-        <div class="title d-flex justify-content-center">
-            {% load static %}
-            <img class="align-middle mx-auto" src="{% static 'title.png' %}">
-        </div>
+        <a href="{% url 'mainpage:index' %}">
+            <div class="title d-flex justify-content-center">
+                {% load static %}
+                <img class="align-middle mx-auto" src="{% static 'title.png' %}">
+            </div>
+        </a>
     </section>
 
     <section class="keyword_list mt-5 position-absolute top-40 start-50 translate-middle">
