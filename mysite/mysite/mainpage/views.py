@@ -42,9 +42,20 @@ def newsList(request, kwRank_keyword):
     return render(request, 'newslist/index.html', content)
 
 def details(request, kwRank_keyword, newsData_id):
+    newslist_data = newsData.objects.filter(keywords__contains=kwRank_keyword)[:5]
+    newslist_content = []
+    for data in newslist_data:
+        if data and data.id != newsData_id:  # 선택된 newsData의 id와 같지 않은 것만 추가
+            newslist_content.append({
+                'id': data.id,
+                'title': data.title,
+                'company': data.company,
+            })
+
     news_data = newsData.objects.filter(id=newsData_id)[0]
     news_data.summary = news_data.summary.split('<split>')
     content = {
+        'newslist': newslist_content,
         'news_data': news_data,
         'keyword': kwRank_keyword
     }
