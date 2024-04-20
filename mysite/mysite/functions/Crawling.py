@@ -59,25 +59,22 @@ def getNewsdata(metadatas):
 def getNewsdatum(url):  # 뉴스 본문 페이지에서 데이터들을 가져오는 함수
     soup = getSoup(url)
     print(url)
-    title = soup.find('title').get_text()
-    reporter = soup.select_one(
-        '#newsEndContents > div.reporter_area div.reporter_profile > div > div.profile_info > a > div.name').get_text()
-    # reporter = soup.select_one('#newsEndContents > p.byline').get_text()
-    company = soup.select_one('#content > div > div.content > div > div.link_news > div > h3 > span.logo').get_text()
-    datetime = soup.select_one(
-        '#content > div > div.content > div > div.news_headline > div > span:nth-child(1)').get_text()
-    datetime = getDatetimeFromNews(datetime)
-    article = soup.find('div', attrs={"id": "newsEndContents"})
-    for child in article.children:
-        if isinstance(child, bs4.element.Tag):
-            child.decompose()
-    article = deleteChild(article).get_text()
     newsdata = {}
-    newsdata['title'] = title
-    newsdata['reporter'] = reporter
-    newsdata['company'] = company
-    newsdata['datetime'] = datetime
-    newsdata['article'] = article
+    newsdata['title'] = soup.find('title')
+    newsdata['reporter'] = soup.select_one(
+        '#newsEndContents > div.reporter_area div.reporter_profile > div > div.profile_info > a > div.name')
+    # reporter = soup.select_one('#newsEndContents > p.byline').get_text()
+    newsdata['company'] = soup.select_one('#content > div > div.content > div > div.link_news > div > h3 > span.logo')
+    newsdata['datetime'] = soup.select_one(
+        '#content > div > div.content > div > div.news_headline > div > span:nth-child(1)')
+    newsdata['article'] = soup.find('div', attrs={"id": "newsEndContents"}).deleteChild(newsdata['article'])
+
+    for t in newsdata:
+        if t is None:
+            t = ' '
+        else: t = t.get_text()
+
+    newsdata['datetime'] = getDatetimeFromNews(newsdata['datetime'])
     newsdata['url'] = url
     return newsdata
 

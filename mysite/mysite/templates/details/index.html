@@ -94,6 +94,9 @@
         .headline {
             color: black;
         }
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -104,10 +107,12 @@
     </header>
 
     <section class="title ms-5">
-        <div class="title d-flex justify-content-left">
-            <span class="titleToday">TODAY&nbsp;</span>
-            <span class="titleKeyword">KEYWORD</span>
-        </div>
+        <a href="{% url 'mainpage:index' %}">
+            <div class="title d-flex justify-content-left">
+                <span class="titleToday">TODAY&nbsp;</span>
+                <span class="titleKeyword">KEYWORD</span>
+            </div>
+        </a>
     </section>
 
     <section class="mt-5 position-absolute top-50 start-50 translate-middle" style="width: 90%; height: 70%; text-align: center;">
@@ -130,22 +135,15 @@
         </section>
 
         <article class="remainNewslist">
-            <div class="remainNews skblue-bg badge rounded-4 mb-1">
-                <div class="newspaper pt-2 pb-1">신문사</div>
-                <div class="headline text-wrap">“오타니 텍사스행, 야마모토 양키스행” 다저스 놀라 자빠질 소리…7억달러+α ‘넣어둬, 넣어둬’</div>
-            </div>
-            <div class="remainNews skblue-bg badge rounded-4 mb-1">
-                <div class="newspaper pt-2 pb-1">신문사</div>
-                <div class="headline text-wrap">“오타니 텍사스행, 야마모토 양키스행” 다저스 놀라 자빠질 소리…7억달러+α ‘넣어둬, 넣어둬’</div>
-            </div>
-            <div class="remainNews skblue-bg badge rounded-4 mb-1">
-                <div class="newspaper pt-2 pb-1">신문사</div>
-                <div class="headline text-wrap">“오타니 텍사스행, 야마모토 양키스행” 다저스 놀라 자빠질 소리…7억달러+α ‘넣어둬, 넣어둬’</div>
-            </div>
-            <div class="remainNews skblue-bg badge rounded-4">
-                <div class="newspaper pt-2 pb-1">신문사</div>
-                <div class="headline text-wrap">“오타니 텍사스행, 야마모토 양키스행” 다저스 놀라 자빠질 소리…7억달러+α ‘넣어둬, 넣어둬’</div>
-            </div>
+
+            {% for i in newslist %}
+                <a href="{% url 'mainpage:details' keyword i.id %}">
+                    <div class="remainNews skblue-bg badge rounded-4 mb-1">
+                        <div class="newspaper pt-2 pb-1">{{ i.company }}</div>
+                        <div class="headline text-wrap">{{ i.title }}</div>
+                    </div>
+                </a>
+            {% endfor %}
         </article>
     </section>
 </body>

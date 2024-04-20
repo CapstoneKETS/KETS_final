@@ -62,10 +62,6 @@
         a {
             text-decoration: none;
         }
-        .dropdown > .btn {
-            background-color: #2968E0;
-            border: #2968E0;
-        }
     </style>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -80,10 +76,12 @@
     </header>
 
     <section class="title">
-        <div class="title d-flex justify-content-center">
-            {% load static %}
-            <img class="align-middle mx-auto" src="{% static 'title.png' %}">
-        </div>
+        <a href="{% url 'mainpage:index' %}">
+            <div class="title d-flex justify-content-center">
+                {% load static %}
+                <img class="align-middle mx-auto" src="{% static 'title.png' %}">
+            </div>
+        </a>
     </section>
 
     <section class="keyword_list mt-5 position-absolute top-40 start-50 translate-middle">
@@ -97,43 +95,26 @@
             <div class="keyword">
                 <div>
                     {% for i in keyword_list %}
-                            <a href="{% url 'mainpage:newsList' i.keyword %}">
-                                <span class="blue-bg badge rounded-pill">{{i.keyword}}</span>
-                            </a>
+                        <a href="{% url 'mainpage:newsList' i.keyword %}">
+                            <span class="blue-bg badge rounded-pill">{{i.keyword}}</span>
+                        </a>
                     {% endfor%}
                 </div>
             </div>
         </div>
 
         <div class="d-flex d-flex justify-content-center">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    오전/오후
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">오전</a></li>
-                    <li><a class="dropdown-item" href="#">오후</a></li>
-                </ul>
-            </div>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    시간
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">1시</a></li>
-                    <li><a class="dropdown-item" href="#">2시</a></li>
-                    <li><a class="dropdown-item" href="#">3시</a></li>
-                    <li><a class="dropdown-item" href="#">4시</a></li>
-                    <li><a class="dropdown-item" href="#">5시</a></li>
-                    <li><a class="dropdown-item" href="#">6시</a></li>
-                    <li><a class="dropdown-item" href="#">7시</a></li>
-                    <li><a class="dropdown-item" href="#">8시</a></li>
-                    <li><a class="dropdown-item" href="#">9시</a></li>
-                    <li><a class="dropdown-item" href="#">10시</a></li>
-                    <li><a class="dropdown-item" href="#">11시</a></li>
-                    <li><a class="dropdown-item" href="#">12시</a></li>
-                </ul>
-            </div>
+            <form id="timeSelect" method="get">
+                <div class="form-group d-flex align-items-center">
+                    <select class="form-select" aria-label="Default select example" name="time" id="time">
+                        {% for i in keyword_list %}
+                            <option value="{{i.datetime}}">{{i.datetime}}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="변경" class="btn btn-outline-success">
+                </div>
+            </form>
         </div>
     </section>
 </body>
+

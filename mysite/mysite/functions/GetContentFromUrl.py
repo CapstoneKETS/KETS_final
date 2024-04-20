@@ -120,7 +120,7 @@ def showMeKwRank():
     kr = kwRank.objects.all().order_by('-rank')
     print(kr)
     for r in kr:
-        print(r.keyword, r.rank)
+        print(r.keyword, r.rank, r.datetime)
 
 def dropKwtables():
     kh = kwHistory.objects.all()
