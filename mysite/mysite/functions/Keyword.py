@@ -6,8 +6,7 @@ from transformers import BertModel
 from mainpage.models import kwHistory
 
 # 참조 : https://bab2min.tistory.com/544, 한국어 불용어 사전 100
-stop_words = ['지난해', '올해', '시즌', '향후', '한국', 'kbo', '야구','게티이미지코리아', '게티이미지', '스포탈코리아',
-              '연합뉴스', '유럽축구연맹', '국제축구연맹', '경기', '아시아축구연맹']
+
 
 # url = "https://t1.daumcdn.net/cfile/tistory/241D6F475873C2B101"
 model_type = 'skt/kobert-base-v1'

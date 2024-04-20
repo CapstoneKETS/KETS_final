@@ -4,7 +4,21 @@ import bs4
 import re
 from time import *
 import json
+from selenium import webdriver # 셀레니움 설치
+import chromedriver_autoinstaller
+chromedriver_autoinstaller.install(True)
+driver = webdriver.Chrome("chromedriver.exe")
 
+
+def seleniumActivate(url): # 셀레니움 활성화 및 페이지 고정 함수
+    driver.get(url)
+    response = requests.get(url)
+    encoding = response.encoding # response에서 메타데이터에 써져있는 인코딩 정보 불러오기
+
+    page_source = driver.page_source
+    # 페이지 고정 이후 beautiful soup로 페이지 소스 가져옴
+    soup = bs(page_source, 'html.parser', from_encoding=encoding) # 인코딩 정보 적용
+    return soup
 
 def dateForm(x):
     if (x > 0) & (x < 10):
@@ -18,6 +32,7 @@ def getSoup(url):  # soup 객체를 가져옴
         return bs(res.text, 'html.parser')
     else:
         print(f"Super big fail! with {res.status_code}")
+
 def getJson(url):
     # URL에 GET 요청을 보내고 응답을 받음
     response = requests.get(url)
@@ -48,7 +63,7 @@ def getNewslist(t):  # 한 시간 동안(X시 대)의 뉴스 목록 가져오기
     return metadatas
 
 
-def getNewsdata(metadatas):
+def getNewsdata(metadatas): # 이거 함수 맞게 수정 부탁드려요 건님
     news_in_hour = []
     for metadata in metadatas:
         news_URL = 'https://sports.news.naver.com/news?oid=' + metadata['oid'] + '&aid=' + metadata['aid']
@@ -57,17 +72,15 @@ def getNewsdata(metadatas):
 
 
 def getNewsdatum(url):  # 뉴스 본문 페이지에서 데이터들을 가져오는 함수
-    soup = getSoup(url)
+    soup = seleniumActivate(url) # getsoup 대체
     print(url)
     newsdata = {}
-    newsdata['title'] = soup.find('title')
-    newsdata['reporter'] = soup.select_one(
-        '#newsEndContents > div.reporter_area div.reporter_profile > div > div.profile_info > a > div.name')
-    # reporter = soup.select_one('#newsEndContents > p.byline').get_text()
-    newsdata['company'] = soup.select_one('#content > div > div.content > div > div.link_news > div > h3 > span.logo')
-    newsdata['datetime'] = soup.select_one(
-        '#content > div > div.content > div > div.news_headline > div > span:nth-child(1)')
-    newsdata['article'] = soup.find('div', attrs={"id": "newsEndContents"}).deleteChild(newsdata['article'])
+    newsdata['title'] = soup.select_one('h2[class*="NewsEndMain_article_title"]').get_text()
+    newsdata['reporter'] = soup.select_one('span[class*="NewsEndMain_author"]').get_text()
+    newsdata['company'] = soup.select_one('a[class*="NewsEndMain_article_head_press_logo"]').select_one("img").get(
+        "alt")
+    newsdata['datetime'] = soup.select_one('em[class*="NewsEndMain_date"]').get_text()
+    newsdata['article'] = soup.find('div', class_="_article_content").get_text()
 
     for t in newsdata:
         if t is None:
@@ -76,6 +89,7 @@ def getNewsdatum(url):  # 뉴스 본문 페이지에서 데이터들을 가져�
 
     newsdata['datetime'] = getDatetimeFromNews(newsdata['datetime'])
     newsdata['url'] = url
+    driver.quit() # 반드시 명시 요망
     return newsdata
 
 
