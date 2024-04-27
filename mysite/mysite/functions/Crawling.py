@@ -18,6 +18,7 @@ def seleniumActivate(url): # 셀레니움 활성화 및 페이지 고정 함수
     page_source = driver.page_source
     # 페이지 고정 이후 beautiful soup로 페이지 소스 가져옴
     soup = bs(page_source, 'html.parser', from_encoding=encoding) # 인코딩 정보 적용
+    driver.quit()
     return soup
 
 def dateForm(x):
@@ -75,29 +76,29 @@ def getNewsdatum(url):  # 뉴스 본문 페이지에서 데이터들을 가져�
     soup = seleniumActivate(url) # getsoup 대체
     print(url)
     newsdata = {}
-    newsdata['title'] = soup.select_one('h2[class*="NewsEndMain_article_title"]').get_text()
-    newsdata['reporter'] = soup.select_one('span[class*="NewsEndMain_author"]').get_text()
-    newsdata['company'] = soup.select_one('a[class*="NewsEndMain_article_head_press_logo"]').select_one("img").get(
-        "alt")
-    newsdata['datetime'] = soup.select_one('em[class*="NewsEndMain_date"]').get_text()
-    newsdata['article'] = soup.find('div', class_="_article_content").get_text()
+    newsdata['title'] = soup.select_one('h2[class*="NewsEndMain_article_title"]')
+    newsdata['reporter'] = soup.select_one('span[class*="NewsEndMain_author"]')
+    newsdata['datetime'] = soup.select_one('em[class*="NewsEndMain_date"]')
+    newsdata['article'] = soup.find('div', class_="_article_content")
 
     for t in newsdata:
-        if t is None:
+        if newsdata[t] is None:
             t = ' '
-        else: t = t.get_text()
+        else: newsdata[t] = newsdata[t].get_text()
 
+    newsdata['company'] = soup.select_one('a[class*="NewsEndMain_article_head_press_logo"]').select_one("img").get(
+        "alt")
     newsdata['datetime'] = getDatetimeFromNews(newsdata['datetime'])
     newsdata['url'] = url
-    driver.quit() # 반드시 명시 요망
+    # driver.quit() # 반드시 명시 요망
     return newsdata
 
 
 def getDatetimeFromNews(datetime):
     datetime = re.split("[ .:]", datetime)
-    if datetime[5] == "오후":
-        datetime[6] = str(int(datetime[6]) + 12)
-    datetime = datetime[1] + '.' + datetime[2] + '.' + datetime[3] + ' ' + datetime[6] + ':' + datetime[7]
+    if datetime[4] == "오후":
+        datetime[5] = str(int(datetime[5]) + 12)
+    datetime = datetime[0] + '.' + datetime[1] + '.' + datetime[2] + ' ' + datetime[5] + ':' + datetime[6]
     return datetime
 
 
