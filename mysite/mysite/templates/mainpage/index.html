@@ -77,15 +77,13 @@
     </header>
 
     <section class="keyword_list mt-5 position-absolute top-40 start-50 translate-middle">
-        <div class="mt-3 mb-3">
-            <div class="keyword">
-                <div>
-                    {% for i in keyword_list %}
+        <div class="mt-10 mb-3">
+            <div class="keyword mt-5">
+                {% for i in keyword_list %}
                         <a href="{% url 'mainpage:newsList' i.keyword %}">
                             <span class="blue-bg badge rounded-pill">{{i.keyword}}</span>
                         </a>
-                    {% endfor%}
-                </div>
+                {% endfor%}
             </div>
         </div>
 
