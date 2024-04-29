@@ -68,21 +68,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <body>
     <header>
-        <a href="">
-            <div class="loginBtd">
-                <span class="login badge rounded-pill">login</span>
-            </div>
-        </a>
-    </header>
-
-    <section class="title">
         <a href="{% url 'mainpage:index' %}">
             <div class="title d-flex justify-content-center">
                 {% load static %}
                 <img class="align-middle mx-auto" src="{% static 'title.png' %}">
             </div>
         </a>
-    </section>
+    </header>
 
     <section class="keyword_list mt-5 position-absolute top-40 start-50 translate-middle">
         <div class="hotOrIndi">

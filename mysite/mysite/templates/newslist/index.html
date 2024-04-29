@@ -80,19 +80,14 @@
 </head>
 <body>
     <header>
-        <div class="loginBtd">
-            <span class="login badge rounded-pill">login</span>
-        </div>
-    </header>
-
-    <section class="title ms-5">
         <a href="{% url 'mainpage:index' %}">
-            <div class="title d-flex justify-content-left">
+            <div class="title d-flex justify-content-left ms-4">
                 <span class="titleToday">TODAY&nbsp;</span>
                 <span class="titleKeyword">KEYWORD</span>
             </div>
         </a>
-    </section>
+    </header>
+
     <section class="newlist mt-5">
 
         {% for i in newslist_content %}
