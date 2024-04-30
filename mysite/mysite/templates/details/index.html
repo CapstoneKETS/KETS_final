@@ -9,95 +9,8 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-    <style>
-        @font-face {
-        font-family: 'Pretendard-Regular';
-        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-        font-weight: 400;
-        font-style: normal;
-        }
-        @font-face {
-        font-family: 'Cafe24Moyamoya-Face-v1.0';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/Cafe24Moyamoya-Face-v1.0.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        }
-        header {
-            height: 15%;
-            margin-top: 30px;
-            width: 97%;
-            text-align: right;
-            font-family: 'Pretendard-Regular';
-            font-size: 110%;
-        }
-        .title{
-            font-family: 'Cafe24Moyamoya-Face-v1.0';
-            font-size: 30px;
-            width: 90%;
-        }
-        .titleToday{
-            color: white;
-            -webkit-text-stroke: 1.5px #2968E0;
-            /* text-shadow: -2px 0px #2968E0, 0px 2px #2968E0, 2px 0px #2968E0, 0px -2px #2968E0; */
-        }
-        .titleKeyword{
-            color: #2968E0;
-        }
-        .login {
-            background-color: #2968E0;
-            font-family: 'Pretendard-slim';
-            text-align: right;
-        }
-        .newsSection{
-            float: left;
-            width: 75%;
-            height: 100%;
-        }
-        .blue-border {
-            width: 98%;
-            height: 100%;
-            box-shadow: 0 0 0 2.5px #2968E0 inset;
-            border-color: #2968E0;
-            color: #2968E0;
-        }
-        .skblue-bg {
-            background-color: #C7DAFF;
-            color: #2968E0;
-        }
-        .news {
-            text-align: left;
-        }
-        .newspaper{
-            padding-top: -15px;
-        }
-        .newsTitle{
-            font-size: 15px;
-        }
-        .newscontent{
-            height: 250px;
-            color: black;
-        }
-        .newsTimeReporter{
-            font-size: 9px;
-            color: rgb(156, 156, 156);
-        }
-        article{
-            float: left;
-            width: 25%;
-            height: 100%;
-        }
-        .remainNews {
-            text-align: left;
-            height: 24.5%;
-        }
-        .headline {
-            color: black;
-        }
-        a {
-            text-decoration: none;
-        }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'kets.css' %}">
 </head>
 <body>
     <header>
@@ -111,15 +24,15 @@
 
     <section class="mt-5 position-absolute top-50 start-50 translate-middle" style="width: 90%; height: 70%; text-align: center;">
         <section class="newsSection">
-            <div class="news blue-border badge rounded-4">
+            <div class="news main-news badge rounded-4">
                 <div>
                     <div class="newspaper pt-2 pb-3">{{ news_data.company }}</div>
                     <div class="newsTitle text-wrap mb-2">{{ news_data.title }}</div>
-                    <div class="newsTimeReporter mb-2">
+                    <div class="detail-newsTimeReporter mb-2">
                         <div>{{ news_data.datetime }}</div>
                         <div>{{ news_data.reporter }}</div>
                     </div>
-                    <div class="newscontent text-wrap">
+                    <div class="detail-newscontent text-wrap">
                         {% for t in news_data.summary %}
                             <p>{{ t }}</p>
                         {% endfor %}
@@ -132,7 +45,7 @@
 
             {% for i in newslist %}
                 <a href="{% url 'mainpage:details' keyword i.id %}">
-                    <div class="remainNews skblue-bg badge rounded-4 mb-1">
+                    <div class="remainNews extra badge rounded-4 mb-1">
                         <div class="newspaper pt-2 pb-1">{{ i.company }}</div>
                         <div class="headline text-wrap">{{ i.title }}</div>
                     </div>

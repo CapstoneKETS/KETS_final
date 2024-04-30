@@ -4,33 +4,26 @@ from .models import *
 
 
 def index(request):
-    # keyword_queryset = kwRank.objects.order_by('-rank')[:15]
-    keyword_queryset = kwRank.objects.all()
+    keyword_queryset = kwRank.objects.order_by('-rank')[:15]
     keyword_content = []
-    for data in keyword_queryset:
+    hour = []
+    for i, data in zip(range(1,16), keyword_queryset):
         keyword_content.append({
-            'rank': data.rank,
+            'rank': i,
             'keyword': data.keyword,
             'datetime': data.datetime
         })
+        hour.append(data.datetime)
+
+    random.shuffle(keyword_content)
+    hour = set(hour)
+
     print(keyword_content)
-
-    old_queryset = kwHistory.objects.all()
-    old_content = []
-    for data in old_queryset:
-        old_content.append({
-            'rank': data.rank,
-            'keyword': data.keyword,
-            'datetime': data.datetime
-        })
-    print(old_content)
-
-    # keyword_list.sort(key = lambda x: x[2])
-
-    # random.shuffle(keyword_list)
+    print(hour)
 
     context = {
         'keyword_list': keyword_content,
+        'hour': hour,
     }
     return render(request, 'mainpage/index.html', context)
 

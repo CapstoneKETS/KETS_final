@@ -10,73 +10,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
-
-    <style>
-        @font-face {
-        font-family: 'Pretendard-Regular';
-        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-        font-weight: 400;
-        font-style: normal;
-        }
-        @font-face {
-        font-family: 'Cafe24Moyamoya-Face-v1.0';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/Cafe24Moyamoya-Face-v1.0.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        }
-        header {
-            height: 15%;
-            margin-top: 30px;
-            width: 97%;
-            text-align: right;
-            font-family: 'Pretendard-Regular';
-            font-size: 110%;
-        }
-        .title{
-            font-family: 'Cafe24Moyamoya-Face-v1.0';
-            font-size: 30px;
-            width: 90%;
-        }
-        .titleToday{
-            color: white;
-            -webkit-text-stroke: 1.5px #2968E0;
-            /* text-shadow: -2px 0px #2968E0, 0px 2px #2968E0, 2px 0px #2968E0, 0px -2px #2968E0; */
-        }
-        .titleKeyword{
-            color: #2968E0;
-        }
-        .login {
-            background-color: #2968E0;
-            font-family: 'Pretendard-slim';
-            text-align: right;
-        }
-        .newlist{
-            width: 100%;
-            text-align: center;
-        }
-        .blue-border {
-            box-shadow: 0 0 0 2.5px #2968E0 inset;
-            border-color: #2968E0;
-            color: #2968E0;
-            width: 18%;
-            height: 250px;
-            text-align: left;
-        }
-        .newspaper{
-            padding-top: -15px;
-        }
-        .newscontent{
-            height: 160px;
-            font-size: 15px;
-        }
-        .newsTimeReporter{
-            font-size: 9px;
-            color: rgb(156, 156, 156);
-        }
-        a {
-            text-decoration: none;
-        }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'kets.css' %}">
 </head>
 <body>
     <header>
@@ -92,7 +27,7 @@
 
         {% for i in newslist_content %}
             <a href="{% url 'mainpage:details' keyword i.id %}">
-                <div class="news blue-border badge rounded-4">
+                <div class="news newslist-blue-border badge rounded-4">
                     <div class="newspaper pt-2">{{ i.company }}</div>
                     <hr>
                     <div class="newscontent text-wrap">{{ i.title }}</div>
@@ -103,7 +38,6 @@
                 </div>
             </a>
         {% endfor %}
-
 
     </section>
 </body>
