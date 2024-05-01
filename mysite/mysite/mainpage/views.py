@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import random
+import datetime
 from .models import *
 
 
@@ -7,7 +8,11 @@ def index(request):
     keyword_queryset = kwRank.objects.order_by('-rank')[:15]
     keyword_content = []
     hour = []
-    for i, data in zip(range(1,16), keyword_queryset):
+    time_list = []
+    now = datetime.datetime.now()
+    time = str(now.time())
+    time = int(time[0:2])
+    for i, data in zip(range(1, 16), keyword_queryset):
         keyword_content.append({
             'rank': i,
             'keyword': data.keyword,
@@ -18,12 +23,14 @@ def index(request):
     random.shuffle(keyword_content)
     hour = set(hour)
 
-    print(keyword_content)
-    print(hour)
+    for i in hour:
+        time_list.append(time - i)
+
+    time_combined_list = zip(hour, time_list)
 
     context = {
         'keyword_list': keyword_content,
-        'hour': hour,
+        'time_combined_list': time_combined_list,
     }
     return render(request, 'mainpage/index.html', context)
 

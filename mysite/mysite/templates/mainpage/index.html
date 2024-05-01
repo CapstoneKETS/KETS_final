@@ -55,8 +55,8 @@
             <form id="timeSelect" method="get">
                 <div class="form-group d-flex align-items-center">
                     <select class="form-select" aria-label="Default select example" name="time" id="time">
-                        {% for i in hour %}
-                            <option value="{{i}}">{{i}}</option>
+                        {% for i, j in time_combined_list %}
+                            <option value="{{i}}">{{j}}</option>
                         {% endfor %}
                     </select>
                     <input type="submit" value="변경" class="btn btn-outline-success">
