@@ -46,7 +46,7 @@ def newsList(request, kwRank_keyword):
                 'reporter': data.reporter,
                 'datetime': data.datetime
             })
-    print(newslist_content)
+
     content = {
         'newslist_content': newslist_content,
         'keyword' : kwRank_keyword
@@ -62,6 +62,7 @@ def details(request, kwRank_keyword, newsData_id):
                 'id': data.id,
                 'title': data.title,
                 'company': data.company,
+                'url': data.url,
             })
 
     news_data = newsData.objects.filter(id=newsData_id)[0]

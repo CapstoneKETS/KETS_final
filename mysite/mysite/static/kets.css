@@ -81,6 +81,7 @@ a {
 .newscontent{
     height: 160px;
     font-size: 15px;
+    line-height: 20px;
 }
 .newsTimeReporter{
     font-size: 9px;
@@ -98,33 +99,53 @@ a {
     border-color: #2968E0;
     color: #2968E0;
 }
-.extra {
-    background-color: #C7DAFF;
-    color: #2968E0;
-}
+
 .news {
     text-align: left;
 }
 .newsTitle{
-    font-size: 15px;
+    font-size:22px;
+    line-height: 28px;
+}
+
+.detail-newspaper{
+    padding-top: -15px;
+    font-size: 13.5px;
+    color: #4587E3;
 }
 .detail-newscontent{
     height: 250px;
     color: black;
+    font-size: 13px;
+    line-height: 20px;
 }
 .detail-newsTimeReporter{
-    font-size: 9px;
+    font-size: 10px;
     color: rgb(156, 156, 156);
+    line-height: 14px;
+}
+.detail-url{
+    color: #4587E3;
+    text-align:center;
+    padding-top: 10%;
 }
 article{
     float: left;
     width: 25%;
     height: 100%;
 }
+.extra {
+    box-shadow: 0 0 0 1.5px #2968E0 inset;
+    color: #2968E0;
+    line-height: 14px;
+    background: #DAE7FF;
+}
 .remainNews {
     text-align: left;
     height: 24.5%;
+
 }
 .headline {
-    color: black;
+    font-size: 11px;
+    color: #555555;
 }

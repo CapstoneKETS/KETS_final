@@ -28,7 +28,7 @@
         {% for i in newslist_content %}
             <a href="{% url 'mainpage:details' keyword i.id %}">
                 <div class="news newslist-blue-border badge rounded-4">
-                    <div class="newspaper pt-2">{{ i.company }}</div>
+                    <div class="newspaper pt-2 ">{{ i.company }}</div>
                     <hr>
                     <div class="newscontent text-wrap">{{ i.title }}</div>
                     <div class="newsTimeReporter">

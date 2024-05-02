@@ -26,28 +26,30 @@
         <section class="newsSection">
             <div class="news main-news badge rounded-4">
                 <div>
-                    <div class="newspaper pt-2 pb-3">{{ news_data.company }}</div>
+                    <div class="detail-newspaper pt-3 pb-3">{{ news_data.company }}</div>
                     <div class="newsTitle text-wrap mb-2">{{ news_data.title }}</div>
-                    <div class="detail-newsTimeReporter mb-2">
+                    <div class="detail-newsTimeReporter mb-2 fw-bolder">
                         <div>{{ news_data.datetime }}</div>
                         <div>{{ news_data.reporter }}</div>
                     </div>
-                    <div class="detail-newscontent text-wrap">
+                    <div class="detail-newscontent text-wrap pt-2 fw-normal">
                         {% for t in news_data.summary %}
                             <p>{{ t }}</p>
                         {% endfor %}
+                    </div>
+                    <div class="detail-url">
+                        <a href="{{news_data.url}}" style="color: #4587E3;">원문으로 이동</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <article class="remainNewslist">
-
             {% for i in newslist %}
                 <a href="{% url 'mainpage:details' keyword i.id %}">
-                    <div class="remainNews extra badge rounded-4 mb-1">
-                        <div class="newspaper pt-2 pb-1">{{ i.company }}</div>
-                        <div class="headline text-wrap">{{ i.title }}</div>
+                    <div class="remainNews extra badge rounded-4 mb-1 d-flex flex-column justify-content-center align-items-center">
+                        <div class="newspaper pb-2 fw-normal">{{ i.company }}</div>
+                        <div class="headline text-wrap fw-bolder">{{ i.title }}</div>
                     </div>
                 </a>
             {% endfor %}
