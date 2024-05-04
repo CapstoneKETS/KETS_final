@@ -13,10 +13,10 @@ class kwRank(models.Model):
     rank = models.FloatField()
 
 class newsData(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
     reporter = models.CharField(max_length=10)
     company = models.CharField(max_length=10)
-    datetime = models.CharField(max_length=10)
+    datetime = models.CharField(max_length=20)
     summary = models.TextField(default=' ')
     url = models.URLField(null=True)
     keywords = models.CharField(max_length=100, null=True)

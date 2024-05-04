@@ -18,7 +18,6 @@ def seleniumActivate(url): # 셀레니움 활성화 및 페이지 고정 함수
     page_source = driver.page_source
     # 페이지 고정 이후 beautiful soup로 페이지 소스 가져옴
     soup = bs(page_source, 'html.parser', from_encoding=encoding) # 인코딩 정보 적용
-    driver.quit()
     return soup
 
 def dateForm(x):
@@ -85,7 +84,7 @@ def getNewsdatum(url):  # 뉴스 본문 페이지에서 데이터들을 가져�
         if newsdata[t] is None:
             t = ' '
         else: newsdata[t] = newsdata[t].get_text()
-
+    newsdata['reporter'] = newsdata['reporter'].split("기자")[0].strip() + " 기자"
     newsdata['company'] = soup.select_one('a[class*="NewsEndMain_article_head_press_logo"]').select_one("img").get(
         "alt")
     newsdata['datetime'] = getDatetimeFromNews(newsdata['datetime'])
