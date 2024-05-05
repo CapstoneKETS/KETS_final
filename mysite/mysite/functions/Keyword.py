@@ -23,7 +23,12 @@ stop_words = [
     '영국',
     '시즌',
     '홋스퍼',
-    '핫스퍼'
+    '핫스퍼',
+    'gettyimages',
+    '유럽축구연맹',
+    '영국',
+    '마이데일리',
+    '김현기'
 ]
 
 # url = "https://t1.daumcdn.net/cfile/tistory/241D6F475873C2B101"

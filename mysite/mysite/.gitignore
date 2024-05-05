@@ -10,6 +10,7 @@
 __pycache__/
 local_settings.py
 db.sqlite3
+*.sqlite3
 media
 
 ### Linux ###
@@ -212,5 +213,4 @@ ENV/
 # mkdocs documentation
 /site
 
-db.sqlite3
 # End of https://www.gitignore.io/api/macos,linux,django,python,pycharm
