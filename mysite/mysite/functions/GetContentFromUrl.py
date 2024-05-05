@@ -111,11 +111,13 @@ def showMeTables():
     kh = kwHistory.objects.all().order_by('-rank')
     kr = kwRank.objects.all().order_by('-rank')
     nd = newsData.objects.all()
-    print(kh, kr, nd)
+    print(kh)
     for h in kh:
         print(h.keyword, h.datetime, h.rank)
+    print(kr)
     for r in kr:
-        print(r.keyword, r.rank)
+        print(r.keyword, r.datetime, r.rank)
+    print(nd)
     for d in nd:
         print(d.title, d.reporter, d.company, d.summary)
 
