@@ -7,10 +7,10 @@ import json
 from selenium import webdriver # 셀레니움 설치
 import chromedriver_autoinstaller
 chromedriver_autoinstaller.install(True)
-driver = webdriver.Chrome("chromedriver.exe")
 
 
-def seleniumActivate(url): # 셀레니움 활성화 및 페이지 고정 함수
+
+def seleniumActivate(url, driver): # 셀레니움 활성화 및 페이지 고정 함수
     driver.get(url)
     response = requests.get(url)
     encoding = response.encoding # response에서 메타데이터에 써져있는 인코딩 정보 불러오기
@@ -18,6 +18,7 @@ def seleniumActivate(url): # 셀레니움 활성화 및 페이지 고정 함수
     page_source = driver.page_source
     # 페이지 고정 이후 beautiful soup로 페이지 소스 가져옴
     soup = bs(page_source, 'html.parser', from_encoding=encoding) # 인코딩 정보 적용
+
     return soup
 
 def dateForm(x):
@@ -64,15 +65,17 @@ def getNewslist(t):  # 한 시간 동안(X시 대)의 뉴스 목록 가져오기
 
 
 def getNewsdata(metadatas):
+    driver = webdriver.Chrome("chromedriver.exe")
     news_in_hour = []
     for metadata in metadatas:
         news_URL = 'https://sports.news.naver.com/news?oid=' + metadata['oid'] + '&aid=' + metadata['aid']
-        news_in_hour.append(getNewsdatum(news_URL))
+        news_in_hour.append(getNewsdatum(news_URL, driver))
+    driver.quit()
     return news_in_hour
 
 
-def getNewsdatum(url):  # 뉴스 본문 페이지에서 데이터들을 가져오는 함수
-    soup = seleniumActivate(url) # getsoup 대체
+def getNewsdatum(url, driver):  # 뉴스 본문 페이지에서 데이터들을 가져오는 함수
+    soup = seleniumActivate(url, driver)  # getsoup 대체
     print(url)
     newsdata = {}
     newsdata['title'] = soup.select_one('h2[class*="NewsEndMain_article_title"]')

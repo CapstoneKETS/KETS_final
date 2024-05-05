@@ -7,8 +7,8 @@ from functions.Preprocessing import *
 from functions.SummarizeIn3Sentences import getSummary as textRank
 from functions.Crawling import *
 from mainpage.models import *
-from selenium import webdriver # 셀레니움 설치
-
+# from selenium import webdriver # 셀레니움 설치
+# driver = webdriver.Chrome("chromedriver.exe")
 
 def insertNewsdata(data):
     summary = textRank(data['article'])
@@ -105,6 +105,7 @@ def updateTables():
     updateKwhistory(kw_list)
     updateKwrank()
     showMeTables()
+    return 1
 
 def showMeTables():
     kh = kwHistory.objects.all().order_by('-rank')
