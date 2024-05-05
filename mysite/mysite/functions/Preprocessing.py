@@ -1,18 +1,3 @@
-from kiwipiepy import Kiwi
-import requests
-from bs4 import BeautifulSoup as bs
-import re
-import pandas as pd
-import math
-import numpy as np
-from sklearn.preprocessing import normalize
-from _datetime import datetime
-import bs4
-
-kiwi = Kiwi(model_type='knlm')
-kiwi.add_user_word('발락', 'NNP', 0)
-
-#print(*kiwi.analyze('손흥민의'), sep='\n')
 
 def quotation_preprocess(sen): # 인용절 속 종결 기호를 마킹
     alphabet_list = []

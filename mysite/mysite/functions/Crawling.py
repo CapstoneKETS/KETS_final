@@ -63,7 +63,7 @@ def getNewslist(t):  # 한 시간 동안(X시 대)의 뉴스 목록 가져오기
     return metadatas
 
 
-def getNewsdata(metadatas): # 이거 함수 맞게 수정 부탁드려요 건님
+def getNewsdata(metadatas):
     news_in_hour = []
     for metadata in metadatas:
         news_URL = 'https://sports.news.naver.com/news?oid=' + metadata['oid'] + '&aid=' + metadata['aid']

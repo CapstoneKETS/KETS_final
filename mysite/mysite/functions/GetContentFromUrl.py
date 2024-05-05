@@ -8,7 +8,7 @@ from functions.SummarizeIn3Sentences import getSummary as textRank
 from functions.Crawling import *
 from mainpage.models import *
 from selenium import webdriver # 셀레니움 설치
-from functions.Crawling import driver
+
 
 def insertNewsdata(data):
     summary = textRank(data['article'])
