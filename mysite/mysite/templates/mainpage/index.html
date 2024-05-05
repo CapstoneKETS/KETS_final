@@ -54,12 +54,14 @@
         <div class="d-flex d-flex justify-content-center">
             <form id="timeSelect" method="get">
                 <div class="form-group d-flex align-items-center">
-                    <select class="form-select" aria-label="Default select example" name="time" id="time">
-                        {% for i, j in time_combined_list %}
-                            <option value="{{i}}">{{j}}시</option>
-                        {% endfor %}
-                    </select>
-                    <input type="submit" value="변경" class="btn btn-outline-success">
+                    <form action="{% url 'mainpage:index' %}" method="post">
+                        <select class="form-select" aria-label="Default select example" name="time" id="time">
+                            {% for i, j in time_combined_list %}
+                                <option value="{{i}}">{{j}}시</option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="변경" class="btn btn-outline-success">
+                    </form>
                 </div>
             </form>
         </div>

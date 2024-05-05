@@ -1,36 +1,35 @@
 from django.shortcuts import render
+from django import forms
 import random
 import datetime
 from .models import *
 
-
 def index(request):
-    keyword_queryset = kwRank.objects.order_by('-rank')[:15]
-    keyword_content = []
-    hour = []
-    time_list = []
+    time = request.GET.get('time')
+    if time is None: time = 0
+    maxtime = kwRank.objects.order_by('-datetime')[0].datetime
     now = datetime.datetime.now()
-    time = str(now.time())
-    time = int(time[0:2])
+    now = int(str(now.time())[0:2])
+    hour = []
+    for i in range(maxtime + 1):
+        h = now - i if (now - i) >= 0 else now - i + 24
+        hour.append(h)
+    times = range(0, len(hour))
+    time_combined_list = zip(times, hour)
+
+    keyword_queryset = kwRank.objects.filter(datetime=time).order_by('-rank')[:15]
+    keyword_content = []
     for i, data in zip(range(1, 16), keyword_queryset):
         keyword_content.append({
             'rank': i,
             'keyword': data.keyword,
             'datetime': data.datetime
         })
-        hour.append(data.datetime)
-
     random.shuffle(keyword_content)
-    hour = set(hour)
-
-    for i in hour:
-        time_list.append(time - i)
-
-    time_combined_list = zip(hour, time_list)
 
     context = {
-        'keyword_list': keyword_content,
         'time_combined_list': time_combined_list,
+        'keyword_list': keyword_content,
     }
     return render(request, 'mainpage/index.html', context)
 

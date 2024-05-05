@@ -91,7 +91,7 @@ def getNewsdatum(url, driver):  # 뉴스 본문 페이지에서 데이터들을 
     newsdata['company'] = soup.select_one('a[class*="NewsEndMain_article_head_press_logo"]').select_one("img").get(
         "alt")
     newsdata['datetime'] = getDatetimeFromNews(newsdata['datetime'])
-    newsdata['url'] = url
+    newsdata['url'] = soup.select_one('a[class*="NewsEndMain_link_origin_article"]').get("href")
     # driver.quit() # 반드시 명시 요망
     return newsdata
 

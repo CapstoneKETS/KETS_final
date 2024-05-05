@@ -7,6 +7,7 @@ from functions.Preprocessing import *
 from functions.SummarizeIn3Sentences import getSummary as textRank
 from functions.Crawling import *
 from mainpage.models import *
+import re
 # from selenium import webdriver # 셀레니움 설치
 # driver = webdriver.Chrome("chromedriver.exe")
 
@@ -25,6 +26,13 @@ def insertNewsdata(data):
                  keywords = keywords)
     t.save()
     return keyword
+
+def getDatetimeFromNews(datetime):
+    datetime = re.split("[ .:]", datetime)
+    if datetime[4] == "오후":
+        datetime[5] = str(int(datetime[5]) + 12)
+    datetime = datetime[0] + '.' + datetime[1] + '.' + datetime[2] + ' ' + datetime[5] + ':' + datetime[6]
+    return datetime
 
 def rankIdf(kw_list):
     print(kw_list)
