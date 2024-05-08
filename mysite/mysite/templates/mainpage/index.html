@@ -31,7 +31,10 @@
                 {% for data in keyword_list %}
                     {% with forloop.counter0 as i %}
                         {% if i > 0 and i|divisibleby:5 %}
-                            <br>
+                            <span style="line-height: 180%;">
+                                <br>
+                            </span>
+
                         {% endif %}
                         {% if data.rank <= 5 %}
                             <a href="{% url 'mainpage:newsList' data.keyword %}">

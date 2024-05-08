@@ -42,15 +42,18 @@ header {
 }
 .blue-bg {
     background-color: #2968E0;
-}
-.skblue-bg {
-    background-color: #C7DAFF;
-    color: #2968E0;
+    font-size: 20px;
 }
 .blue-border {
     box-shadow: 0 0 0 2px #2968E0 inset;
     border-color: #2968E0;
     color: #2968E0;
+    font-size: 17px:
+}
+.skblue-bg {
+    background-color: #C7DAFF;
+    color: #2968E0;
+    font-size: 14px;
 }
 img {
     max-width: 70%;
